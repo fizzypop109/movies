@@ -1,5 +1,6 @@
 export * from "./Auth";
 export * from "./Explore";
+export * from "./Meta";
 export * from "./MovieDetails";
 export * from "./MovieCard";
 export * from "./Navigation";
