@@ -1,22 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background */
+  --background: #F5F3F0;
+  --surface: #FFFFFF;
+
+  /* Primary */
+  --primary: #E50914;
+  --primary-hover: #B20710;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary */
+  --secondary: #564D4A;
+  --secondary-foreground: #FFFFFF;
+
+  /* Text */
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6360;
+
+  /* Border */
+  --border: #E0DCD8;
+
+  /* Accent */
+  --accent: #F4C542;
+  --accent-foreground: #1A1A1A;
+
+  /* Utility */
+  --destructive: #DC2626;
+  --muted: #F0EDEA;
+  --muted-foreground: #8A8480;
+  --ring: #E50914;
 }
 
-@theme inline {
+.dark {
+  --background: #0D0D0F;
+  --surface: #1A1A2E;
+
+  --primary: #E50914;
+  --primary-hover: #FF2A35;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #8A8A9A;
+  --secondary-foreground: #0D0D0F;
+
+  --text-primary: #F0F0F0;
+  --text-secondary: #9999A8;
+
+  --border: #2A2A3E;
+
+  --accent: #F4C542;
+  --accent-foreground: #1A1A1A;
+
+  --destructive: #EF4444;
+  --muted: #16162A;
+  --muted-foreground: #6B6B7A;
+  --ring: #E50914;
+}
+
+@theme {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
 }
 
 body {
