@@ -1,8 +1,9 @@
-// components/Watchlist.tsx
 import { useState } from "react";
 import { WatchlistStatus, useWatchlist } from "@/hooks/useWatchlist";
 import { MovieDetails } from "@/components/MovieDetails";
 import { Movie } from "@/types";
+import {useSession} from "@/hooks";
+import {Auth} from "@/components/Auth";
 
 type WatchlistProps = {
     watchlist: ReturnType<typeof useWatchlist>;
@@ -15,10 +16,34 @@ const tabs: { label: string; status: WatchlistStatus }[] = [
 ];
 
 export const Watchlist = ({ watchlist }: WatchlistProps) => {
+    const { session } = useSession();
+
     const [activeTab, setActiveTab] = useState<WatchlistStatus>("want_to_see");
     const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+    const [loadingMovie, setLoadingMovie] = useState(false);
 
     const filtered = watchlist.items.filter((item) => item.status === activeTab);
+
+    const handleSelectMovie = async (movieId: number) => {
+        setLoadingMovie(true);
+        try {
+            const res = await fetch(`/api/movies/${movieId}`);
+            const data = await res.json();
+            setSelectedMovie(data);
+        } catch (error) {
+            console.error("Failed to fetch movie details:", error);
+        } finally {
+            setLoadingMovie(false);
+        }
+    };
+
+    if (!session) {
+        return (
+            <div className="flex h-screen items-center justify-center bg-background">
+                <Auth />
+            </div>
+        );
+    }
 
     return (
         <>
@@ -42,25 +67,21 @@ export const Watchlist = ({ watchlist }: WatchlistProps) => {
                     ))}
                 </div>
 
+                {!session && <Auth />}
+
                 {/* List */}
-                {watchlist.loading ? (
+                {session && watchlist.loading && (
                     <div className="flex-1 flex items-center justify-center">
                         <p className="text-text-secondary text-sm">Loading...</p>
                     </div>
-                ) : filtered.length > 0 ? (
+                )}
+
+                {session && !watchlist.loading && filtered.length > 0 && (
                     <div className="flex-1 min-h-0 overflow-y-auto grid grid-cols-2 gap-4 pb-4">
                         {filtered.map((item) => (
                             <button
                                 key={item.id}
-                                onClick={() =>
-                                    setSelectedMovie({
-                                        id: item.movie_id,
-                                        title: item.title,
-                                        poster_path: item.poster_path,
-                                        vote_average: item.vote_average,
-                                        release_date: item.release_date,
-                                    } as Movie)
-                                }
+                                onClick={() => handleSelectMovie(item.movie_id)}
                                 className="group flex flex-col text-left"
                             >
                                 <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-md">
@@ -82,7 +103,9 @@ export const Watchlist = ({ watchlist }: WatchlistProps) => {
                             </button>
                         ))}
                     </div>
-                ) : (
+                )}
+
+                {session && !watchlist.loading && filtered.length <= 0 && (
                     <div className="flex-1 flex flex-col items-center justify-center text-text-secondary">
                         <span className="text-4xl mb-2">🎬</span>
                         <p className="text-sm">No movies here yet</p>
@@ -90,6 +113,15 @@ export const Watchlist = ({ watchlist }: WatchlistProps) => {
                     </div>
                 )}
             </div>
+
+            {/* Loading overlay */}
+            {loadingMovie && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                    <div className="bg-surface rounded-xl px-6 py-4 shadow-lg">
+                        <p className="text-sm text-text-primary">Loading movie...</p>
+                    </div>
+                </div>
+            )}
 
             {selectedMovie && (
                 <MovieDetails

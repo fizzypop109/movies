@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { Movie } from "@/types";
-import {useWatchlist} from "@/hooks";
+import {useSession, useWatchlist} from "@/hooks";
 
 type MovieDetailsProps = {
     movie: Movie;
@@ -9,6 +9,8 @@ type MovieDetailsProps = {
 };
 
 export const MovieDetails = ({ movie, onClose, watchlist }: MovieDetailsProps) => {
+    const { session } = useSession();
+
     const year = movie.release_date?.split("-")[0];
     const rating = movie.vote_average?.toFixed(1);
 
@@ -84,7 +86,7 @@ export const MovieDetails = ({ movie, onClose, watchlist }: MovieDetailsProps) =
                         )}
 
                         {/* Action buttons */}
-                        {watchlist && (
+                        {watchlist && session && (
                             <div className="mt-5 flex flex-col gap-2">
                                 {watchlist.getStatus(movie.id) ? (
                                     <>
