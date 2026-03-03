@@ -77,12 +77,12 @@ export const Watchlist = ({ watchlist }: WatchlistProps) => {
                 )}
 
                 {session && !watchlist.loading && filtered.length > 0 && (
-                    <div className="flex-1 min-h-0 overflow-y-auto grid grid-cols-2 gap-4 pb-4">
+                    <div className="flex-1 min-h-0 overflow-y-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-wrap gap-4 pb-4">
                         {filtered.map((item) => (
                             <button
                                 key={item.id}
                                 onClick={() => handleSelectMovie(item.movie_id)}
-                                className="group flex flex-col text-left"
+                                className="group flex flex-col text-left xl:w-[15rem]"
                             >
                                 <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-md">
                                     {item.poster_path ? (
