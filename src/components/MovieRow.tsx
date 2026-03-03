@@ -13,7 +13,7 @@ export const MovieRow = ({ movies, onSelect }: MovieRowProps) => {
                 <button
                     key={movie.id}
                     onClick={() => onSelect(movie)}
-                    className="shrink-0 w-28 group text-left flex flex-col"
+                    className="shrink-0 w-28 md:w-35 lg:w-45 group text-left flex flex-col"
                 >
                     <div className="relative aspect-[2/3] w-full rounded-lg overflow-hidden shadow-md">
                         {movie.poster_path ? (
@@ -35,7 +35,7 @@ export const MovieRow = ({ movies, onSelect }: MovieRowProps) => {
                         )}
                     </div>
 
-                    <p className="mt-1.5 text-xs font-medium text-text-primary line-clamp-2">
+                    <p className="mt-1.5 text-xs lg:text-base font-medium text-text-primary line-clamp-2">
                         {movie.title}
                     </p>
                 </button>

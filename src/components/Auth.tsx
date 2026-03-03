@@ -44,7 +44,7 @@ export const Auth = () => {
             <button
                 onClick={handleLogin}
                 disabled={loading || !email}
-                className="w-full bg-primary hover:bg-primary-hover disabled:bg-black/30 text-primary-foreground font-semibold py-3 rounded-xl transition-colors"
+                className="w-full bg-primary hover:bg-primary-hover disabled:bg-disabled text-primary-foreground font-semibold py-3 rounded-xl transition-colors"
             >
                 {loading ? "Sending..." : "Send Magic Link"}
             </button>

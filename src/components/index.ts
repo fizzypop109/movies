@@ -4,4 +4,5 @@ export * from "./MovieDetails";
 export * from "./MovieCard";
 export * from "./Navigation";
 export * from "./Search";
+export * from "./Settings";
 export * from "./Watchlist";

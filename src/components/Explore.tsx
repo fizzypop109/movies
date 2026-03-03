@@ -38,7 +38,7 @@ export const Explore = ({ watchlist }: ExploreProps) => {
                 <Search onChange={handleSearch} />
 
                 {results && results.length > 0 ? (
-                    <div className="w-full min-h-0 flex-1 grid grid-cols-2 gap-4 overflow-y-auto pb-4">
+                    <div className="w-full min-h-0 flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:flex xl:flex-row xl:flex-wrap gap-4 overflow-y-auto pb-4">
                         {results.map((result) => (
                             <MovieCard
                                 key={result.id}

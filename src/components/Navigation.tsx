@@ -1,5 +1,6 @@
 import { CiViewList } from "react-icons/ci";
 import { MdOutlineExplore } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
 import { Dispatch, JSX, SetStateAction } from "react";
 import { Page } from "@/types";
 
@@ -28,6 +29,12 @@ const options: Option[] = [
         activeIcon: <MdOutlineExplore className="size-6" />,
         key: "explore",
     },
+    {
+        label: "Settings",
+        icon: <IoSettingsOutline className="size-6" />,
+        activeIcon: <IoSettingsOutline className="size-6" />,
+        key: "settings",
+    }
 ];
 
 export const Navigation = ({ activePage, updatePage }: NavigationProps) => {

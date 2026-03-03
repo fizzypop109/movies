@@ -10,7 +10,7 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
 
     return (
         <button
-            className="group flex flex-col text-left"
+            className="group flex flex-col text-left xl:w-[15rem]"
             onClick={onClick}
         >
             <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-md">

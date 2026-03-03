@@ -30,6 +30,7 @@
   --muted: #F0EDEA;
   --muted-foreground: #8A8480;
   --ring: #E50914;
+  --disabled: rgba(0, 0, 0, 0.3);
 }
 
 .dark {
@@ -55,6 +56,7 @@
   --muted: #16162A;
   --muted-foreground: #6B6B7A;
   --ring: #E50914;
+  --disabled: rgba(255, 255, 255, 0.3);
 }
 
 @theme {
@@ -70,6 +72,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
+  --color-disabled: var(--disabled);
   --color-border: var(--border);
   --color-ring: var(--ring);
   --color-text-primary: var(--text-primary);

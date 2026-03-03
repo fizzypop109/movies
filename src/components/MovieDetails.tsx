@@ -23,7 +23,7 @@ export const MovieDetails = ({ movie, onClose, watchlist }: MovieDetailsProps) =
             />
 
             {/* Modal */}
-            <div className="relative w-full sm:max-w-[450px] max-h-[90vh] bg-surface rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-full max-w-[450px] lg:max-w-[800px] max-h-[90vh] bg-surface rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl">
                 {/* Close button */}
                 <button
                     onClick={onClose}
@@ -57,7 +57,7 @@ export const MovieDetails = ({ movie, onClose, watchlist }: MovieDetailsProps) =
                                 <img
                                     src={`https://image.tmdb.org/t/p/w185${movie.poster_path}`}
                                     alt={movie.title}
-                                    className="w-20 rounded-lg shadow-lg border-2 border-surface"
+                                    className="w-20 lg:w-30 rounded-lg shadow-lg border-2 border-surface"
                                 />
                             )}
 

@@ -1,1 +1,1 @@
-export type Page = "list" | "explore";
+export type Page = "list" | "explore" | "settings";
