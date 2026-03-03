@@ -1,6 +1,7 @@
 import { Theme, THEMES, useTheme } from "@/context/ThemeContext";
 import { FaCheck } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 const LABELS: Record<Theme, string> = {
     light: "Light",
@@ -23,22 +24,22 @@ export const Settings = () => {
         setTheme(localTheme);
     };
 
+    const handleSignOut = async () => {
+        await supabase.auth.signOut();
+    };
+
     return (
-        <div className="flex flex-col h-full gap-6">
+        <div className="flex flex-col flex-1 min-h-0 w-full gap-6">
             <div>
-                <h2 className="text-lg font-semibold text-text-primary">
-                    Settings
-                </h2>
-                <p className="text-sm text-text-secondary">
+                <h1 className="text-xl font-bold text-text-primary">Settings</h1>
+                <p className="text-sm text-text-secondary mt-1">
                     Customize your experience
                 </p>
             </div>
 
             {/* Theme Section */}
             <div className="flex flex-col gap-3">
-                <h3 className="text-sm font-semibold text-text-primary">
-                    Theme
-                </h3>
+                <h3 className="text-sm font-semibold text-text-primary">Theme</h3>
 
                 <div className="flex flex-col gap-2">
                     {THEMES.map((t) => {
@@ -55,14 +56,13 @@ export const Settings = () => {
                   ${
                                     isSelected
                                         ? "border-primary bg-primary/10 text-primary"
-                                        : "border-border bg-surface text-text-primary hover:border-primary/60 hover:bg-muted"
+                                        : "border-border bg-surface text-text-primary hover:border-primary/40 hover:bg-muted"
                                 }
                 `}
                             >
                                 <span>{LABELS[t]}</span>
-
                                 <FaCheck
-                                    className={`transition-opacity ${
+                                    className={`size-4 transition-opacity ${
                                         isSelected ? "opacity-100" : "opacity-0"
                                     }`}
                                 />
@@ -77,17 +77,26 @@ export const Settings = () => {
                 onClick={onSave}
                 disabled={!hasChanges}
                 className={`
-          mt-auto rounded-xl px-4 py-3 text-sm font-semibold
-          transition-all
+          w-full rounded-xl px-4 py-3 text-sm font-semibold transition-colors
           ${
                     hasChanges
                         ? "bg-primary text-primary-foreground hover:bg-primary-hover"
-                        : "bg-disabled text-text-secondary cursor-not-allowed"
+                        : "bg-disabled text-muted-foreground cursor-not-allowed"
                 }
         `}
             >
                 Save Changes
             </button>
+
+            {/* Sign Out */}
+            <div className="mt-auto pb-4">
+                <button
+                    onClick={handleSignOut}
+                    className="w-full py-3 rounded-xl text-sm font-medium text-destructive bg-muted hover:bg-destructive/10 transition-colors"
+                >
+                    Sign Out
+                </button>
+            </div>
         </div>
     );
 };
