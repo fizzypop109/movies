@@ -1,3 +1,8 @@
+export type Genre = {
+    id: number;
+    name: string;
+};
+
 export type Movie = {
     id: number;
     title: string;
@@ -10,6 +15,7 @@ export type Movie = {
     adult: boolean;
     backdrop_path: string;
     genre_ids: number[];
+    genres?: Genre[];
     original_language: string;
     original_title: string;
     popularity: number;

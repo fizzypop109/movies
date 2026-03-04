@@ -1,5 +1,6 @@
 export * from "./Auth";
 export * from "./Explore";
+export * from "./GenreTags";
 export * from "./Meta";
 export * from "./MovieDetails";
 export * from "./MovieCard";
@@ -7,4 +8,7 @@ export * from "./Navigation";
 export * from "./Recommendations";
 export * from "./Search";
 export * from "./Settings";
+export * from "./StarRating";
+export * from "./Videos";
 export * from "./Watchlist";
+export * from "./WatchlistFilters";

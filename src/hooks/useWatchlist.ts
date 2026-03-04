@@ -14,6 +14,8 @@ export type WatchlistItem = {
     vote_average: number;
     release_date: string;
     status: WatchlistStatus;
+    rating: number | null;
+    genre_ids: number[];
     created_at: string;
 };
 
@@ -73,10 +75,22 @@ export const useWatchlist = (session: Session | null) => {
                 poster_path: movie.poster_path,
                 vote_average: movie.vote_average,
                 release_date: movie.release_date,
+                genre_ids: movie.genre_ids || [],
                 status,
             },
             { onConflict: "user_id,movie_id" }
         );
+
+        if (!error) await refetch();
+    };
+
+    const rateMovie = async (movieId: number, rating: number) => {
+        if (!session) return;
+
+        const { error } = await supabase
+            .from("watchlist")
+            .update({ rating })
+            .eq("movie_id", movieId);
 
         if (!error) await refetch();
     };
@@ -108,5 +122,5 @@ export const useWatchlist = (session: Session | null) => {
         return item?.status ?? null;
     };
 
-    return { items, loading, addMovie, updateStatus, removeMovie, getStatus };
+    return { items, loading, addMovie, rateMovie, updateStatus, removeMovie, getStatus };
 };

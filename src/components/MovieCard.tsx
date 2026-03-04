@@ -1,4 +1,6 @@
+// components/MovieCard.tsx
 import { Movie } from "@/types";
+import { GenreTags } from "@/components/GenreTags";
 
 type MovieCardProps = {
     movie: Movie;
@@ -9,10 +11,7 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
     const rating = movie.vote_average?.toFixed(1);
 
     return (
-        <button
-            className="group flex flex-col text-left xl:w-[15rem]"
-            onClick={onClick}
-        >
+        <button className="group flex flex-col text-left" onClick={onClick}>
             <div className="relative aspect-[2/3] w-full rounded-xl overflow-hidden shadow-md">
                 {movie.poster_path ? (
                     <img
@@ -26,7 +25,6 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
                     </div>
                 )}
 
-                {/* Rating badge */}
                 {rating && Number(rating) > 0 && (
                     <span className="absolute top-2 right-2 bg-black/70 text-accent text-xs font-bold px-2 py-0.5 rounded-full">
             ★ {rating}
@@ -38,11 +36,15 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
                 {movie.title}
             </p>
 
-            {movie.release_date && (
-                <p className="text-xs text-text-secondary mt-0.5">
-                    {movie.release_date.split("-")[0]}
-                </p>
-            )}
+            <div className="flex items-center gap-2 mt-1">
+                {movie.release_date && (
+                    <p className="text-xs text-text-secondary">
+                        {movie.release_date.split("-")[0]}
+                    </p>
+                )}
+            </div>
+
+            {movie.genre_ids && <GenreTags genreIds={movie.genre_ids} />}
         </button>
     );
 };
