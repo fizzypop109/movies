@@ -7,6 +7,7 @@ import { Movie } from "@/types";
 import { MovieDetails } from "@/components/MovieDetails";
 import { MdUpcoming, MdLocalMovies } from "react-icons/md";
 import {useWatchlist} from "@/hooks";
+import {Recommendations} from "@/components/Recommendations";
 
 type ExploreProps = {
     watchlist: ReturnType<typeof useWatchlist>;
@@ -67,6 +68,13 @@ export const Explore = ({ watchlist }: ExploreProps) => {
                             icon={<MdUpcoming className="size-5 text-primary" />}
                             onSelect={setSelectedMovie}
                         />
+
+                        {watchlist.items.length > 0 && (
+                            <Recommendations
+                                watchlist={watchlist}
+                                onSelect={setSelectedMovie}
+                            />
+                        )}
                     </div>
                 )}
             </div>
